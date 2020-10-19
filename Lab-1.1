@@ -1,0 +1,64 @@
+1. Iniciar sesion a través de un terminal por SSH
+  Usuario: student
+  Password: student
+
+2. Cambiar el password el usuario por "student123"
+
+[student@desktopX -]$ passwd
+Changing password for user student .
+Changing password for student .
+(current ) UNIX password : student
+New password : student123
+Retype new password : student123
+passwd : all authentication tokens updated successfully .
+
+3. Mostrar la fecha y hora actual
+
+[student@desktopX -]$ date
+
+4. Muestre la hora en el siguiente formato: HH:MM:SS AM/PM.
+
+[student@desktopX -]$ date +%r
+
+5. ¿De qué tipo es el archivo /opt/texto-prueba? ¿Es de texto plano?
+Usar el comando file para determinarlo
+
+[student@desktopX -]$ file /opt/texto-prueba
+/opt/texto-prueba: POSIX shell script, ASCII text executable
+
+6. Use el comando "wc" y los atajos del Bash para mostrar el tamaño del archivo /opt/texto-prueba
+El atajo más fácil es utilizar ESC+. para reutilizar el argumento del comando anterior.
+
+[student@desktopX -]$ wc <Esc> .
+[student@desktopX -]$ wc /opt/texto-prueba
+  139  4016 27142 /opt/texto-prueba
+
+7. Mostrar las primeras 10 líneas del archivo /opt/texto-prueba
+
+[student@desktopX -]$ tail <Esc> .
+[student@desktopX -]$ tail /opt/texto-prueba
+... Output omitted ...
+
+8. Repita el comando anterior pero esta vez mostrando las primeras 20 líneas. Utilice la opcion "-n 20". 
+Utilice la menor cantidad de teclas posibles usando los atajos del Bash.
+
+La tecla "Flecha arriba" le mostrará el último comando ejecutado. La combinación "Ctrl+a" lo llevará al inicio de la línea. 
+
+[student@desktopX -]$ tail -n 20 /opt/texto-prueba
+... Output omitted ...
+
+9. Ejecute el comando "date" sin ningún argumento para mostrar la fecha actual.
+
+[student@desktopX -]$ date
+
+10. Use el historial del bash para mostrar solo la hora
+
+[student@desktopX -]$ history
+...
+   44   date +%r
+...
+[student@desktopX -]$ !44
+date +%X
+10 :49:56 AM
+
+
