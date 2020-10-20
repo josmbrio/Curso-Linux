@@ -32,11 +32,66 @@ Iniciar sesión son su usuario e inciar en el directorio home
 
 7. Cambiarse al directorio chapters. Mover los archivos mystery_chapterX.odf al directorio chapter con la sintaxis más simple posible. 
 
-[student@serverx ~]$ cd Documents/my_bestseller/chapters
-[student@serverx ~]$ mv ~/mystery_chapter* .
-[student@serverx ~]$ ls -l
+[student@serverx chapters]$ cd Documents/my_bestseller/chapters
+[student@serverx chapters]$ mv ~/mystery_chapter* .
+[student@serverx chapters]$ ls -l
 
-8. 
+8. Mover los archivos mystery_chapter1.odf y mystery_chapter2.odf al directorio editor. Utilice sintaxis relativa partiendo del direcorio chapters.
 
+[student@serverx chapters]$ mv mystery_chapter1.odf mystery_chapter2.odf ../editor
+[student@serverx chapters]$ ls -l
+[student@serverx chapters]$ ls -l ../editor
 
+9. Mover los archivos mystery_chapter7.odf y mystery_chapter8.odf al directorio vacation. Utilice sintaxis relativa partiendo del direcorio chapters.
+Usar comando sin caracteres wildcard
 
+[student@serverx chapters]$ mv mystery_chapter7.odf mystery_chapter8.odf ../vacation
+[student@serverx chapters]$ ls -l
+[student@serverx chapters]$ ls -l ../vacation
+
+10. Con un solo comando cambiarse al directorio season2 y copiar el archivo tv_season2_episode1.ogg al directorio vacation.
+
+[student@serverx chapters]$ cd ~/Videos/season2
+[student@serverx season2]$ cp tv_season2_episode1.ogg ~\Documents/my_bestseller/chapters
+
+11. Con un solo comando cambiarse al direcotorio vacation. Listar los archivos. Retorne al direcotrio season2 con "cd -". Copiar el archivo episode2 en el direcotrio vacation.
+Retorne a la carpeta vacation usando el atajo "cd -" nuevamente.
+
+[student@serverx season2]$ cd ~\Documents/my_bestseller/vacation
+[student@serverx vacation]$ ls -l
+[student@serverx vacation]$ cd -
+[student@serverx season2]$ cp tv_season2_episode2.ogg ~\Documents/my_bestseller/vacation
+[student@serverx season2]$ cd -
+[student@serverx vacation]$ ls -l
+
+12. Copiar los archivos mystery_chapter5.odf y mystery_chapter6.odf en el direcotrio plot_change. Muévase al directorio padre de vacation y hágalo desde ahí.
+
+[student@serverx vacation]$ cd ..
+[student@serverx my_bestseller]$ cp chapters/mystery_chapter[56].odf plot_change
+[student@serverx my_bestseller]$ ls -l chapters
+[student@serverx my_bestseller]$ ls -l plot_change
+
+13. Realizar 3 respaldos del archivo mystery_chapter5.odf. Cambiarse al directorio plot_changes. 
+Copiar el archivo como uno nuevo incluyendo en el nombre la fecha (Año-Mes-Dia).
+Hacer otra copia incluyendo en el nombre la hora con número de segundos para asegurar que el nombre sea único.
+Hacer otra copia incluyendo el nombre del usuario que se encuentra logeado.
+
+[student@serverx my_bestseller]$ cd plot_change
+[student@serverx plot_change]$ cp mystery_chapter5.odf mystery_chapter5_$(date +%F).odf
+[student@serverx plot_change]$ cp mystery_chapter5.odf mystery_chapter5_$(date +%s).odf
+[student@serverx plot_change]$ cp mystery_chapter5.odf mystery_chapter5_$USER.odf
+[student@serverx plot_change]$ ls -l
+
+14. Eliminar todos los archivos dentro del direcotrio plot_changes. Luego eliminar el directorio vacío con rmdir.
+
+[student@serverx plot_change]$ rm mystery*
+[student@serverx plot_change]$ cd ..
+[student@serverx my_bestseller]$ rmdir plot_changes
+[student@serverx my_bestseller]$ ls -l
+
+15. Eliminar el directorio vacation con el comando rm y la opcion recursiva.
+Al terminar retorne al directorio home
+
+[student@serverx my_bestseller]$ rm -r vacation
+[student@serverx my_bestseller]$ ls -l
+[student@serverx my_bestseller]$ cd
