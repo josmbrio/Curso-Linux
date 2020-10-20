@@ -1,1 +1,42 @@
+Iniciar sesión son su usuario e inciar en el directorio home
+
+1. Crear 12 archivos con nombres "tv_seasonX_episodeY.ogg". Reemplace la X por el numero de la temporada, y la Y por número del episodio. Debe tener 2 temporadas de 6 episodios cada uno.
+
+[student@serverx ~]$ touch tv_season{1..2}_episode{1..6}.ogg
+[student@serverx ~]$ ls -l
+
+2. Crear 8 archivos con nombre mystery_chapterX.odf donde X va del 1 al 8.
+
+[student@serverx ~]$ touch mystery_chapter{1..8}.odf
+
+3. Para organizar los episodios, cree 2 directorios llamados season1 y season2 bajo el directorio existente Videos.
+
+[student@serverx ~]$ mkdir Videos/season{1..2}
+[student@serverx ~]$ ls -lR
+
+4. Mover los episodios donde corresponda. Utilizar solo 2 comandos y utilizar solo rutas relativas.
+
+[student@serverx ~]$ mv tv_season1* Videos/season1
+[student@serverx ~]$ mv tv_season2* Videos/season2
+[student@serverx ~]$ ls -lR
+
+5. Crear un directorio llamado Documents y crear ahí dos niveles de directorios. El directorio my_bestseller bajo Documents, y el directorio chapters bajo my_bestseller. Todo con un solo comando.
+
+[student@serverx ~]$ mkdir -p Documents/my_bestseller/chapters
+[student@serverx ~]$ ls -lR
+
+6. UTilizando un solo comando, cree 3 directorios más bajo el directorio my_bestseller. Póngale los nombres editor, plot_change y vacation.
+
+[student@serverx ~]$ mkdir Documents/my_bestseller/{editor,plot_change,vacation}
+[student@serverx ~]$ ls -lR
+
+7. Cambiarse al directorio chapters. Mover los archivos mystery_chapterX.odf al directorio chapter con la sintaxis más simple posible. 
+
+[student@serverx ~]$ cd Documents/my_bestseller/chapters
+[student@serverx ~]$ mv ~/mystery_chapter* .
+[student@serverx ~]$ ls -l
+
+8. 
+
+
 
