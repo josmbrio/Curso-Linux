@@ -1,1 +1,73 @@
+Iniciar sesión en el sistema con su usuario asignado
+
+1. Dirigirse al directorio home del usuario y crear lo siguiente:
+  - Seis archivos con nombre de la forma songX.mp3
+  - Seis archivos con nombre de la forma picX.jpg
+  - Seis archivos con nombre de la forma filmX.avi
+
+Reemplazar la X por números del 1 al 6.
+
+[student@serverx -]$ touch song1.mp3 song2.mp3 song3.mp3 song4.mp3 song5.mp3 song6.mp3
+...
+...
+...
+
+2. Crear 3 carpetas llamadas  Music, Pictures y Videos y mover los archivos creados:
+  Los archivos songX.mp3 en la carpeta Music
+  Los archivos picX.jpg en la carpeta Pictures
+  Los archivos filmX.avi en la carpeta Videos
+  
+[student@serverx -]$ mv song1.mp3 song2.mp3 song3.mp3 song4.mp3 song5.mp3 song6.mp3 Music
+...
+...
+...
+  
+3. En el directorio home crear 3 carpetas de proyectos llamadas friends, family y work. Crearlos con un solo comando.
+
+[student@serverX -]$ mkdir friends family work
+[student@serverX -]$ ls -l
+
+4. Copiar los archivos creados anteriormente en las carpetas de proyecto friends y family. Para cada proyecto ubicarse primero en la carpeta y copiar desde ahí los archivos de la siguiente manera.
+  - Copiar los archivos de todos los tipos cuyo nombre contengan los números 1 y 2, en la carpeta friends
+  - Copiar los archivos de todos los tipos cuyo nombre contengan los números 1 y 2, en la carpeta family
+
+[student@serverX -]$ cd friends
+[student@serverX friends ]$ cp ~/Music/song1.mp3 ~/Music/song2.mp3 ~/Pictures/snap1.jpg ~/Pictures/snap2.jpg ~/Videos/film1.avi ~/Videos/film2.avi .
+[student@serverX friends]$ ls -l
+[student@serverX friends]$ cd ../family
+[student@serverX family]$ cp ~/Music/song .mp3 ~/Music/song4.mp3 ~/Pictures/snap3.jpg ~/Pictures/snap4.jpg ~/Videos/film3.avi ~/Videos/film4.avi .
+[student@serverX family]$ ls -l
+
+5. Para la carpeta del proyecto work, crear copias adicionales
+
+[student@serverX family]$ cd ../work
+[student@serverX work]$ cp ~/Music/song5.mp3 ~/Music/song6.mp3 ~/Pictures/snap5.jpg ~/Pictures/snap6.jpg ~/Videos/film5.avi ~/Videos/film6.avi .
+[student@serverX work]$ ls -l
+
+6. Ahora es momento de limpiar las carpetas de proyectos.
+  Cámbiese al directorio home. Intente eliminar las carpetas de proyectos family y friends con el comando "rmdir"
+  
+[student@serverX work]$ cd
+[student@serverX -]$ rmdir family friends
+rmdir: failed to remove 'family' : Directory not empty
+rmdir : failed to remove 'friends ': Directory not empty
+
+El comando rmdir fallará puesto que los directorios no están vacíos.
+
+7. Use otro comando para eliminar las carpetas family y friends.
+
+[student@serverX -]$ rm -r family friends
+[student@serverX -]$ ls -l
+
+8. Elimine todos los archivos de la carpeta del proyecto work, pero sin eliminar el directorio work.
+
+[student@serverx -]$ cd work
+[student@serverX work]$ rm song5.mp3 song6.mp3 snap5.jpg snap6.jpg film5.avi film6.avi
+[student@serverx work]$ ls -l
+
+9. Finalmente desde su directorio home utilice el comando "rmdir" para eliminar el direcorio work. El comando ahora funciona porque la carpeta está vacía.
+
+[student@serverx work]$ cd
+[student@serverx -]$ rmdir work
+[student@serverx -]$ ls -l
 
