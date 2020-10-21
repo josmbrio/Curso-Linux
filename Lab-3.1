@@ -1,1 +1,57 @@
 
+Inicie sesion con su usuario
+
+1. Acceder al man del comando vi(1)
+
+[root@myserver ~]# man 1 vi
+
+2. Investigue como editar un archivo con el comando vi 
+
+vi /etc/passwd
+
+3. Investigue con qué opción podemos editar un archivo dirigiéndonos directamente a la línea número 5
+
+vi +5 /etc/passwd
+
+4. Investigue sobre el comando su(1)
+
+[root@myserver ~]# man 1 su
+
+5. Investigue cómo se comporta el comando su cuando se omite el nombre de usuario
+
+su asume que el usuario es root
+
+6. Investigue como se comporta el comando su cuando va acompañado del caracter -
+
+El comando su inicia un login shell cargando las variables de ambiente del usuario. Sin el caracter - las variables de ambientes seguirán siendo las del usuario anterior.
+
+7. Consulte el man del comando passwd y determine cuál es la opción que permite bloquear y desbloquear una cuenta de usuario cuando es usado por el usuario root.
+
+passwd -l usuario
+passwd -u usuario
+
+8. Busque el autor del manual del comando passwd. Abrir el man y buscar la palabra "author"
+
+AUTHOR
+       Cristian Gafton <gafton@redhat.com>
+
+9. Consultar el man para conocer la sintaxis del archivo /etc/passwd. Luego indicar ¿qué se especifica en el tercer campo de cada línea de tal archivo?
+
+La sección del manual es la 5 encontrada con el comando man -k passwd
+El campo es el UID de cada cuenta de usuario 
+
+10. ¿Qué comando lista información detallada sobre un archivo ZIP?
+
+El comando zipinfo(1) encontrado con el comando man -k zip
+
+11. ¿Qué sección del man contiene una lista de parámetros que pueden ser pasados al kernel al momento de booteo?
+
+bootparam(7) encontrado con el comando man -k boot
+
+12. ¿Qué comando es utilizado para tunear un filesystem en formato ext4?
+
+tune2fs(8) encontrado con el comando man -k ext4
+
+
+
+
