@@ -30,3 +30,12 @@ uid=1001(juliet) gid=1001(juliet) groups=1001{juliet),30000(shakespeare)
 9. Confirme que los usuarios fueron añadidos a los grupos revisando el archivo /etc/group
 
 [root@serverx -]# tail -5 /etc/group
+
+10. Cambiar el usuario principal del usuario reba por shakespeare
+
+[root@serverx -]# usermod -g artistas reba
+
+11. Confirme que el usurio reba tiene ahora como grupo principal shakespeare
+
+[root@serverx -]# id
+uid=1003(reba) gid=30000(shakespeare) groups=1003(reba)
