@@ -1,3 +1,110 @@
-Iniciar sesion con su usuario
+Iniciar sesion con su usuario Redeatelcap1
 
-1. 
+PASO PREVIO:
+Ejecutar el comando 'sudo su -' para logearse como root. Luego ejecutar el comando 'passwd' para cambiarle la contraseña al usuario root. Escribir la contraseña 'root123' (sin comillas). 
+Agregar al grupo wheel al usuario Redeatelcap1 con el comando 'usermod -a -G wheel Redeatelcap1'. Salir con el comando 'exit' para regresar al usuario Redeatelcap1.
+
+1. Ver la información de su usuario y grupo. Mostrar su directorio actual.
+
+[student@serverx -]$ id
+uid=1000 (student ) gid=1000(student ) groups=1000( student }, 10 (wheel )
+context=unconfined_u :unconfined_r : unconfined_t :s0-s0:c0. c1023
+[student@serverx -]$ pwd
+/home/student
+
+2. Ver el contenido de la variable HOME y la variable PATH.
+
+[student@serverx -]$ echo $HOME
+/home/student
+[student@serverx -)$ echo $PATH
+/usr/local/bin :/usr/local/sbin :/usr/bin : /usr/sbin :/bin : /sbin : /home/
+student/ . local/bin :/home/student/bin
+
+3. Cambiarse a root sin utilizar el signo '-' y explorar las caracteristicas del nuevo ambiente
+
+[student@serverx -]$ su
+Password: root123
+
+4. Ver la información de su usuario y grupo. Mostrar su directorio actual.
+
+[student@serverx -]# id
+uid=0( root ) gid=0( root ) groups=0( root )
+context=unconfined_u :unconfined_r : unconfined t:s0-s0:c0.c1023
+[student@serverx -]# pwd
+/home/student
+
+5. Ver el contenido de la variable HOME y la variable PATH.
+
+[root@serverX student]# echo $HOME
+/root
+[root@serverX student ]# echo $PATH
+/usr/local/bin :/usr/local/sbin :/usr/bin : /usr/sbin :/bin :/sbin : /home/
+student/ . local/bin :/home/student/bin
+
+6. Salir del shell logeado con root para regresar al shell logeado con Redeatelcap1
+
+[root@serverX student]# exit
+
+7. Cambiarse a root cargando todas sus variables de ambiente y explorar las caracteristicas del nuevo ambiente
+
+[student@serverx -]$ su -
+Password: root123
+
+8. Ver la información de su usuario y grupo. Mostrar su directorio actual.
+
+[root@serverx -]# id
+uid=0( root ) gid=0( root ) groups=0( root )
+context=unconfined_u :unconfined r: unconfined_t :s0-s0:c0. c1023
+[root@serverx -]# pwd
+/root
+
+9. Ver el contenido de la variable HOME y la variable PATH.
+
+[root@serverx -]# echo $HOME
+/root
+[root@serverx -]# echo $PATH
+/usr/local/sbin :/usr/local/bin :/sbin :/bin : /usr/sbin :/usr/bin :/root/bin
+
+10. Salir del shell logeado con root para regresar al shell logeado con Redeatelcap1
+
+[root@serverX student]# exit
+
+11. Ejecutar algunos comandos como usuario Redeatelcap1 que requieren acceso como root. Vea lo que sucede.
+
+[root@serverX student]# tail -n 5 /var/log/messages
+tail : cannot open '/var/log/messages' for reading : Permission denied
+
+[root@serverX student]# cp /etc/motd /etc/motdOLD
+cp : cannot create regular file '/etc/motdOLD ': Permission denied
+[student@serverx -]$ sudo cp /etc/motd /etc/motdOLD
+
+12. Ahora utilice el comando sudo para que los comandos anteriores resulten exitosos.
+
+[root@serverX student]# sudo tail -n 5 /var/log/messages
+... Output Omitted ...
+... Output Omitted ...
+
+[root@serverX student]# sudo cp /etc/motd /etc/motdOLD
+
+13. Eliminar el archivo creado /etc/motdOLD
+
+[student@serverX -]$ rm /etc/motdOLD
+rm : remove write-protected regular empty file '/etc/motdOLD '? y
+rm : cannot remove '/etc/motdOLD ': Permission denied
+
+14. Eliminar el archivo creado /etc/motdOLD escalando privilegios.
+
+[student@serverx -]$ sudo rm /etc/motdOLD
+
+15. Editar el archivo de configuracion /etc/motd
+
+[student@serverx -]$ echo "Welcome to class" >> /etc/motd
+-bash : /etc/motd: Permission denied
+
+[student@serverX -]$ sudo vim /etc/motd
+
+
+
+
+
+
