@@ -1,0 +1,35 @@
+Iniciar sesion con su usuario
+
+1. Liste todo el contenido de su directorio home de manera detallada (incluyendo archivos ocultos) y envielo al archivo editing_final_lab.txt
+
+[student@serverx -]$ cd
+[student@serverX -]$ ls -al > editing_final_lab.txt
+
+2. Edite el archivo creado con el editor VI y elimine las 3 primeras lineas
+
+Ingrese con VI y en modo comando elimine las lineas con 'dd'
+
+3. Haga un respaldo el archivo y añada la fecha en formato UNIX al final del nombre el archivo.
+
+[student@serverx -]$ cp editing_final_lab.txt editing_final_lab_$(date +%s).txt
+
+4. Añada una linea larga al final del archivo original editing_final_lab.txt para identificar donde empezara un nuevo contenido. No utilizar el editor VI.
+
+[student@serverX -]$ echo "---------------------------------------" >> editing_final_lab.txt
+
+5. Añada al archivo el listado de procesos que actualmente esta ejecutando el usuario en este terminal. Muestre los procesos por pantalla y al mismo tiempo envielos al final del archivo editing_final_lab.txt
+
+[student@serverx -]$ ps -f | tee -a editing_final_lab.txt
+
+6. Confirmar que el listado de procesos se haya añadido al final de la lista en el archivo.
+
+[student@serverx -]$ cat editing_final_lab.txt
+
+7. Añada una linea larga al final del archivo original editing_final_lab.txt para identificar donde empezara un nuevo contenido. No utilizar el editor VI.
+
+[student@serverX -]$ echo "---------------------------------------" >> editing_final_lab.txt
+
+8. Ahora añada al archivo la ultima linea del listado de procesos que actualmente esta ejecutando el usuario en este terminal. Envielos al final del archivo editing_final_lab.txt
+
+[student@serverx -]$ ps -f | tail -n 1 >> editing_final_lab.txt
+
