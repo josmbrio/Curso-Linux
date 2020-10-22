@@ -1,0 +1,60 @@
+Iniciar sesion con su usuario
+
+1. Crear un nuevo archivo con el editor VI:
+
+[root@myserver ~]# vi laboratorio4-1
+
+2. Escribir el siguiente texto entrando en modo Edicion:
+
+   El kernel de Linux® es el elemento principal de los sistemas operativos (SO) Linux.
+   Es la interfaz fundamental entre el hardware de una computadora y sus procesos. 
+   Los comunica entre sí y gestiona los recursos de la manera más eficiente posible.
+
+   Se llama kernel porque se encuentra dentro del sistema operativo.
+   El kernel controla todas las funciones principales del hardware, ya sea un teléfono, una computadora portátil, un servidor o cualquier otro tipo de equipo.
+
+Cambiese a modo edicion desde el modo comando con la tecla 'i'
+
+3. Pase al modo comando y muevase entre caracteres y lineas.
+
+Presione ESC y use las flechas del teclado. Tambien puede usar las teclas 'h' 'j' 'k' 'l'. 
+
+4. Guarde el archivo sin salir del editor de texto
+
+En el modo comando escriba :w y presione ENTER
+
+5. Copie la primera línea y péguela al final. Luego salga del editor sin guardar cambios
+
+Ubiquese en la linea 1 y presione 'yy'. Luego vaya a la última línea y presione 'p'. Ahora presione ESC para pasar a modo comando y ':q!' para salir sin guardar
+
+6. Ingrese al editor nuevamente pero dirigendose de manera automática a la línea 5. Elimine esa linea
+
+[root@myserver ~]# vi +5 laboratorio4-1
+Presione 'dd' para eliminar.
+
+7. Habilite la nuemracion de lineas en el editor. Dirijase a la linea 2, vaya al final de la linea y agrega la palabra CURSO
+
+En modo comando escriba 'set nu'. Dirijase a la linea 2 y presion '$' para ir al final de la linea. Luego presiones 'a' para habilitar el modo edicion y empezar a escribir en el siguiente caracter donde esta ubicado y escriba CURSO.
+
+8. Salga del editor guardando los cambios y vuelva a ingresar
+
+Pase a modo comando con la tecla ESC y escriba ':x'
+Ingrese nuevamente:
+[root@myserver ~]# vi laboratorio4-1
+
+9. Busque las lineas que contengan la palabra 'kernel' y reemplace las 2 primeras coincidencias por la palabra 'nucleo'
+
+En modo comando escriba '/kernel' y preiones ENTER. Cuente las coincidencias avanzando con 'n' y retrocediendo con 'N' 
+Habilite el modo edicion con 'i' y reemplace el texto.
+
+10. Elimine los caracteres 'e' de la palabra kernel en la ultima coincidencia que queda sin pasar a modo edicion.
+
+En modo comando ubíquese en los caracteres que desea eliminar y presione 'x'
+
+11. Salga del editor guardando los cambios.
+
+En modo comando escriba ':wq' o ':x'
+
+
+
+
