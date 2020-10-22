@@ -1,0 +1,32 @@
+Iniciar sesion con su usuario
+
+1. Cambiese a root con SU
+
+2. Crear un grupo suplementario llamado shakespeare con GID 30000
+
+[root@serverX ~]# groupadd -g 30000 shakespeare
+
+3. Crear un grupo suplementario llamado artistas
+
+[root@serverX ~]# groupadd artistas
+
+4. Confirmar que los grupos anteriores fueron creados revisando el archivo /etc/group
+
+[root@serverX ~]# tail -n 5 /etc/group
+
+5. Agregar el usuario juliet creado en el Lab anterior al grupo shakespeare como Grupo Suplementario
+
+[root@serverx -]# usermod -G shakespeare juliet
+
+6. Confirme que el usurio juliet fue agregado al grupo usando el comando 'id'
+
+[root@serverx -]# id
+uid=1001(juliet) gid=1001(juliet) groups=1001{juliet),30000(shakespeare)
+
+7. Añadir el usuario romeo al grupo shakespeare como Grupo Suplemntario
+
+8. Añadir el usuario hamlet al grupo artistas como Grupo Suplementario
+
+9. Confirme que los usuarios fueron añadidos a los grupos revisando el archivo /etc/group
+
+[root@serverx -]# tail -5 /etc/group
