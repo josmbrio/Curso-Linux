@@ -1,0 +1,48 @@
+Iniciar sesion con su usuario
+
+1. Cambiarse a usuario root
+
+[student@serverX -]$ su -
+Password : root123
+
+2. Crear el usuario juliet con UID de 4000
+
+[root@serverx -]# useradd -u 4000 juliet
+
+3. Confirmar que el usuario ha sido creado revisando el archivo donde estan todos los usuarios
+
+[root@serverx -]# tail -n 2 /etc/passwd
+tcpdump:x:72:72::/:/sbin/nologin
+juliet:x:1001:1001::/home/juliet:/bin/bash
+
+4. Configurar la contraseña del usuario juliet. Como contraseña poner 'juliet'
+
+[root@serverx -]# passwd juliet
+Changing password for user juliet .
+New password : juliet
+BAD PASSWORD : The password is shorter than 8 characters
+Retype new password : juliet
+passwd : all authentication tokens updated successfully
+
+5. Configurar nuevos usuarios: romeo con UID 4001, hamlet con UID 4002, reba con UID 4003. 
+
+6. Configurar la contraseña de cada uno de los usuarios
+
+7. Meter a los usuarios romeo, hamlet y reba en el grupo wheel
+
+[root@serverx -]# usermod -a -G wheel juliet
+
+8. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que ingrese. Luego cierre la sesion con 'exit'
+
+9. Bloquee la cuenta de usuario romeo
+
+[root@serverx -]# usermod -L romeo
+
+10. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que no pueda ingresar.
+
+11. Desbloquee la cuenta de usuario romeo
+
+[root@serverx -]# usermod -U romeo
+
+12. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que pueda ingresar.
+
