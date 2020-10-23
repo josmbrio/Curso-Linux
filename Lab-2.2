@@ -52,22 +52,22 @@ Usar comando sin caracteres wildcard
 10. Con un solo comando cambiarse al directorio season2 y copiar el archivo tv_season2_episode1.ogg al directorio vacation.
 
 [student@serverx chapters]$ cd ~/Videos/season2
-[student@serverx season2]$ cp tv_season2_episode1.ogg ~\Documents/my_bestseller/chapters
+[student@serverx season2]$ cp tv_season2_episode1.ogg ~/Documents/my_bestseller/chapters/vacation
 
 11. Con un solo comando cambiarse al direcotorio vacation. Listar los archivos. Retorne al direcotrio season2 con "cd -". Copiar el archivo episode2 en el direcotrio vacation.
 Retorne a la carpeta vacation usando el atajo "cd -" nuevamente.
 
-[student@serverx season2]$ cd ~\Documents/my_bestseller/vacation
+[student@serverx season2]$ cd ~/Documents/my_bestseller/vacation
 [student@serverx vacation]$ ls -l
 [student@serverx vacation]$ cd -
-[student@serverx season2]$ cp tv_season2_episode2.ogg ~\Documents/my_bestseller/vacation
+[student@serverx season2]$ cp tv_season2_episode2.ogg ~/Documents/my_bestseller/vacation
 [student@serverx season2]$ cd -
 [student@serverx vacation]$ ls -l
 
 12. Copiar los archivos mystery_chapter5.odf y mystery_chapter6.odf en el direcotrio plot_change. Muévase al directorio padre de vacation y hágalo desde ahí.
 
 [student@serverx vacation]$ cd ..
-[student@serverx my_bestseller]$ cp chapters/mystery_chapter[56].odf plot_change
+[student@serverx chapters]$ cp mystery_chapter[56].odf plot_change
 [student@serverx my_bestseller]$ ls -l chapters
 [student@serverx my_bestseller]$ ls -l plot_change
 
