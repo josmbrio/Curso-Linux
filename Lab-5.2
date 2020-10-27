@@ -32,17 +32,8 @@ passwd : all authentication tokens updated successfully
 
 [root@serverx -]# usermod -a -G wheel juliet
 
-8. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que ingrese. Luego cierre la sesion con 'exit'
+8. Verificar que lo usarios pertenezcan a grupo wheel
 
-9. Bloquee la cuenta de usuario romeo
+[root@serverx -]# cat /et/group
 
-[root@serverx -]# usermod -L romeo
-
-10. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que no pueda ingresar.
-
-11. Desbloquee la cuenta de usuario romeo
-
-[root@serverx -]# usermod -U romeo
-
-12. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que pueda ingresar.
-
+Buscar el grupo wheel.
