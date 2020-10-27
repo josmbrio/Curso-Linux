@@ -1,0 +1,151 @@
+Inicie sesión con su usuario
+
+1. Pasarse a usario root
+
+[student@myserver ~]$ sudo su -
+
+2. Crear un grupo llamado ateam
+
+[root@serverX -]# groupadd ateam
+
+3. Crear 2 usuarios llamados andy y alice y configurar la contraseña como 'password'
+
+[root@serverX -]# useradd andy
+[root@serverX -]# useradd alice
+[root@serverX -]# passwd andy
+...
+[root@serverX -]# passwd alice
+...
+
+4. Ingresar a los usuarios andy y alice dentro del grupo ateam
+
+[root@serverX -]# usermod -a -G atema andy
+[root@serverX -]# usermod -a -G atema alice
+
+5. Crear un directorio dentro de /home llamado ateam-text
+
+[root@serverX -]# mkdir /home/ateam-text
+
+6. CAmbiar el grupo propietario del la carpeta ateam-text por ateam
+
+[root@serverX -]# chown :ateam /home/ateam-text
+
+7. Asegurese que los permisos a la carpeta ateam-text permita a los usuario miembros de ateam la creacion y eliminacion de archivos
+
+[root@serverX -]# chmod g+w /home/ateam-text
+
+8. Asegurese que los permisos a la carpeta ateam-text prohiba a otros el acceso a los archivos
+
+[root@serverx -]# chmod 770 /home/ateam-text
+[root@serverX -]$ ls -ld /home/ateam-text
+drwxrwx- -- . 1 root ateam 6 Jan 23 12:50 /home/ateam- text
+
+9. Cambiese al usuario andy
+
+[root@serverx -]# su - andy
+
+10. Navegue dentro de la carpeta /home/ateam-text
+
+[andy@serverX -]$ cd /home/ateam-text
+
+11. Cree un archivo en blanco llamado andytext3
+
+[andy@serverX ateam- text]$ touch andyfile3
+
+12. Muestre los permisos por defecto que se crearon en ese archivo
+
+[andy@serverX ateam- text]$ ls -l andyfile3
+
+13. Cambie el grupo propietario del archivo a ateam y muestre nuevamente los permisos
+
+[andy@serverX ateam- text]$ chown :ateam andyfile3
+[andy@serverX ateam- text]$ ls -l andyfile3
+
+14. Salga del shell, y cambiese a usuario alice
+
+[andy@serverX ateam- text]$ exit
+[root@serverX ~]$ su - alice
+
+15. Navegue dentro de la carpeta /home/ateam-text
+
+[alice@serverX -]$ cd /home/ateam-text
+
+16. Intente acceder y modificar el archivo andyfile3. Deberia ser exitoso
+
+[alice@serverX ateam-text ]$ echo "text" >> andyfile3
+[alice@serverX ateam-text ]$ cat andyfile3
+text
+
+*** PERMISOS POR DEFECTO ***
+
+17. Utilice el comando umask para determinar la mascara por defecto de alice
+
+[alice@serverX ateam-text ]$ umask
+
+18. Cree el directorio /tmp/shared y dentro de este un archivo llamado defaults
+
+[alice@serverX -]$ mkdir /tmp/shared
+[alice@serverX -]$ ls -ld /tmp/shared
+drwxrwxr-x . 2 alice alice 6 Jan 26 18:43 /tmp/shared
+[alice@serverX -]$ touch /tmp/shared/defaults
+[alice@serverX -] $ ls -l /tmp/shared/defaults
+-rw-rw-r--. 1 alice alice 0 Jan 26 18:43 /tmp/shared/defaults
+
+19. Cambie el grupo propietario de /tmp/shared a ateam y muestre nuevamente los permisos de /tmp/shared
+
+[alice@serverx -]$ chown :ateam /tmp/shared
+[alice@serverX -] $ ls -ld /tmp/shared
+drwxrwxr-x. 2 alice ateam 21 Jan 26 18:43 /tmp/shared
+
+20. Cree un nuevo archivo en /tmp/shared llamado alice3 y muestre los permisos de tal archivo
+
+[alice@serverX -]$ touch /tmp/shared/alice3
+[alice@serverX -]$ ls -l /tmp/shared/alice3
+-rw-rw-r--. 1 alice alice 0 Jan 26 18:46 /tmp/shared/alice3
+
+21. Configure los permisos de /tmp/shared de tal manera que los archivos creados dentro de este herede el grupo propietario ateam de la carpeta. Pruebe que la configuracion este surtiendo efecto.
+
+[alice@serverx -]$ chmod g+s /tmp/shared
+[alice@serverx -]$ ls -ld /tmp/shared
+drwxrwsr-x. 2 alice ateam 34 Jan 26 18:46 /tmp/shared
+
+[alice@serverx -]$ touch /tmp/shared/alice4
+[alice@serverx -]$ ls -l /tmp/shared/alice4
+-rw-rw-r--. 1 alice ateam 0 Jan 26 18:48 /tmp/shared/alice4
+
+22. Cambie el umask de alice para que los nuevos archivos creados tengan solo-lectura para el grupo y ningun acceso para otros. Luego cree un nuevo archivo para comprobarlo.
+
+[alice@serverX -]$ umask 027
+[alice@serverx -]$ touch /tmp/shared/alice5
+[alice@serverX -]$ ls -l /tmp/shared/alice5
+-rw-r-----. 1 alice ateam 0 Jan 26 18:48 /tmp/shared/alice5
+
+23. Iniciar sesion en otro Putty con alice y mostrar el umask actual
+
+[alice@serverX -]$ umask
+0002
+
+24. Cambie el umask por defecto del usuario alice para prohibir el acceso a usuarios que no pertenezcan a su grupo
+
+[alice@serverx -]# echo "umask 007" >> ~/.bashrc
+[alice@serverx -]# cat ~/.bashrc
+
+# .bashrc
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+/etc/bashrc
+fi
+# Uncomment the following line if you don 't like systemctl 's auto- paging feature :
+# export SYSTEMD_PAGER=
+# User specific aliases and functions
+umask 007
+
+25. Cierre sesion y abra un Putty nuevamente con el usuario alice y confirme que el nuevo umask por defecto esta cambiado.
+
+[alice@serverX -]$ umask
+0007
+
+
+
+
+
