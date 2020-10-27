@@ -1,0 +1,71 @@
+Iniciar sesión con su usuario y pasarse a root (sudo su -)
+
+1. Verifique que tenga el usuario romeo creado.
+
+[root@serverx -]# cat /etc/passwd
+
+2. Bloquee la cuenta de usuario romeo
+
+[root@serverx -]# usermod -L romeo
+
+3. Inicie sesion en un nuevo Putty con el usuario 'romeo'.
+
+login as: 
+Password:
+Access denied
+
+4. Desbloquee la cuenta de usuario romeo
+
+[root@serverx -]# usermod -U romeo
+
+5. Inicie sesion en un nuevo Putty con el usuario 'romeo'. Despues salga de la sesión
+
+Exitoso
+
+6. Cambie la politica de password del usuario romeo para que tenga que cambiar la contraseña cada 90 días.
+
+[student@serverX -]$ chage -M 90 romeo
+
+7. Consulta las políticas actuales de contraseña del usuario
+
+[student@serverX -]$ chage -l romeo
+
+8. Forzar un cambio de contraseña en el próximo login del usuario romeo
+
+[student@serverX -]$ chage -d 0 romeo
+
+9. Inicie sesion como usuario romeo en un nuevo Putty y cambie la contraseña por 'Curso.2020' (sin comillas)
+
+login as: romeo
+romeo@192.168.100.25's password:
+You are required to change your password immediately (administrator enforced)
+Activate the web console with: systemctl enable --now cockpit.socket
+
+This system is not registered to Red Hat Insights. See https://cloud.redhat.com/
+To register this system, run: insights-client --register
+
+Last login: Tue Oct 27 01:26:16 2020 from 192.168.100.6
+WARNING: Your password has expired.
+You must change your password now and login again!
+Changing password for user romeo.
+Current password:
+New password:
+Retype new password:
+
+10. Determina la fecha de aquí a 180 días en el futuro
+
+[student@serverX -]$ date -d "+180 days"
+Sun Apr 25 01:28:05 -05 2021
+
+11. Configure el usuario romeo para que la cuenta expire en la fecha del punto anterior.
+
+[root@myserver ~]# chage -E 2021-04-25 romeo
+
+12. Verifique la nueva fecha de expiracion configurada
+
+[root@myserver ~]# chage -l romeo
+
+13. 
+
+12. Abra un nuevo putty e inicie sesion con el usuario romeo. Verifique que pueda ingresar.
+
