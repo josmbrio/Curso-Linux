@@ -1,0 +1,80 @@
+Iniciar sesion con su usuario
+
+1. Abrir 2 terminales con putty. Ubicarlos uno a lado del otro
+
+2. En la ventana izquierda ejecute el siguiente comando que continuamente estara añadiendo la palabra 'rock' y un espacio al archivo ~/outfile cada 1 segundo.
+Para que el control de jobs reconozca todo la linea como un solo job pongalo todo dentro de un parentesis.
+
+[student@serverX -]$ (while true; do echo -n "rock " >> ~/outfile; sleep 1; done)
+
+3. En la ventana derecha utilice el comando tail para ver en vivo como el procesos escribe en el archivo
+
+[student@serverx -]$ tail -f ~/outfile
+
+4. En la ventana izquierda suspenda el proceso en ejecucion. El shell muestra el ID del job dentro de corchetes. 
+En la ventana derecha confirme que el proceso dejo de escribir en el archivo.
+
+[student@serverx -]$ Ctrl + Z
+
+5. En la ventana izquierde consulte el listado de jobs. El signo + denota el job actual. Reinicie el job en background. 
+Confirme en la ventana derecha que el job nuevamente esta activo.
+
+[student@serverx -]$ jobs
+[1]+ Stopped ( while true; do
+   echo -n "rock " >> ~/outfile; sleep 1;
+done )
+[student@serverx -]$ bg
+[student@serverX -]$ jobs
+
+6. En la ventana izquierda inicie 2 nuevos procesos iguales al anterior escribiendo en el mismo archivo pero uno escribiendo la palabra 'paper' y otro escribiendo la palabra 'scissors'. 
+Ejecutelos en background. Para que el control de jobs tome la linea como un solo job encierre todo el comando con parentesis antes de usar el simbolo &.
+
+[student@serverX -]$ (while true; do echo -n "paper " >> ~/outfile; sleep 1; done) &
+[student@serverX -]$ (while true; do echo -n "scissors " >> ~/outfile; sleep 1; done) &
+
+7. En la ventana izquierda consulte los jobs para ver los 3 procesos en estado Running. Confirme en la ventana derecha que los 3 procesos estan escribiendo.
+
+[student@serverx -]$ jobs
+
+8. Suspenda el proceso 'rock'. Para esto pase el job a foreground utilizando el ID del job y luego suspendalo con Ctrl+Z. 
+Confirme en la ventana derecha que el procesos 'rock' ya no esta activo.
+
+[student@serverx -]$ jobs
+[student@serverx -]$ fg %number
+[student@serverx -]$ Ctrl+Z
+
+9. Termine el proceso 'paper'. Para esto pase el job a foreground utilizando el ID del job y luego terminelo con Ctrl+C
+
+[student@serverX -]$ jobs
+[student@serverx -]$ fg %number
+[student@serverx -]$ Ctrl+C
+
+10. En la ventana izquierda ver los jobs restantes usando el comando 'ps j'. El job suspendido tiene un estado T. 
+El job 'scissors' que esta en background tiene un estado S debido a que el proceso 'ps f' esta en ejecucion (estado R) mientras se presento ek resultado en pantalla.
+
+[student@serverx -]$ ps j
+PPID PIO PGID SID TTY TPGID STAT UID TIME COMMAND
+4489 6223 6223 6223 pts/1 12918 Ss 1000 0:00 bash
+4489 6237 6237 6237 pts/2 9782 Ss 1000 0:00 bash
+6237 9782 9782 6237 pts/2 9782 S+ 1000 0:00 tail -f /home/student/a
+7360 9856 7360 6223 pts/1 12918 T 1000 0:00 sleep 1
+7395 12916 7395 6223 pts/1 12918 s 1000 0:00 sleep 1
+6223 12918 12918 6223 pts/1 12918 R+ 1000 0:00 ps j
+
+11. Termine los 2 jobs restantes. Para esto paselos a foreground uno por uno y envieles la señal Ctrl+C
+Dese cuenta que al pasar a foreground el job 'rock' suspendido este reinicia temporalmente hasta terminarlo con Ctrl+Z.
+
+[student@serverx -]$ fg %number
+[student@serverX -]$ Ctrl+C
+[student@serverx -]$ fg %number
+[student@serverX -]$ Ctrl+C
+[student@serverx -]$ jobs
+
+12. En la ventana derecha termine el comando tail con Ctrl+C
+
+[student@serverx -]$ Ctrl+C
+
+
+
+
+
