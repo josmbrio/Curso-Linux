@@ -106,5 +106,72 @@ Verifique tambien que en la ventana derecha este proceso este activo.
 [student@serverx -]$ pkill - SIGTERM tail
 [student@serverx -]$
 
+*********** MONITOREANDO PROCESOS ********************
+
+17. En la ventana derecha ejecutar el comando top para monitorear procesos
+
+[student@serverx -]$ top
+
+18. En la ventana izquierda cree un archivo llamado process101 con el siguiente contenido:
+
+#!/bin/bash
+while true;
+do
+ var=1
+ while [[ var -lt 50000 ]];
+ do
+  var=$(($var+1))
+ done
+ sleep 1
+done
+
+19. Ubicar el archivo dentro de una carpeta llamada bin dentro de su directorio home. Esto hara que podamos ejecutar el comando directamente desde cualquier ruta.
+
+[student@serverx -]$ mkdir bin
+[student@serverx -]$ mv process101 bin/
+
+20. Otorgar permisos de ejecucion al archivo process101
+
+[student@serverx -]$ cd bin
+[student@serverx -]$ chmod +x process101
+
+21. Cierre sesión y vuelva a hacer login con el usuario.
+
+22. Determine cuantos CPU logicos tiene su servidor.
+
+[student@serverx -]$ cat /proc/cpuinfo | wc -l
+
+23. Ejecutar 1 instancia en background del ejecutable process101
+
+[student@serverx -]$ process101 &
+
+24. En la ventana derecha identificar el proceso en la herramienta TOP. Utilizar las teclas 'l' 't' y 'm' para alternar carga, threads y memoria.
+Qué porcentaje de uso de CPU tiene el procesos process101? Se espera ver entre el 25% y 30%. El load average de 1 minuto deberia ser menor a 1
+
+25. Ejecutar una segunda instancia en background del ejecutable process101
+
+[student@serverx -]$ process101 &
+
+26. En la ventana derecha identifique el nuevo proceso y la carga del sistema luego de un minuto.
+
+27. Estima la carga que cada cpu esta soportando en promedio en el ultimo minuto
+
+( Load Average / Cantidad de CPUs )
+
+28. Desde la ventana derecha dentro del comando top y sin salir de este, termine los 3 procesos. 
+
+Presione la tecla 'k'
+Ingrese el numero de proceso
+Ingrese la señal 15 o sigterm
+Verifique que el proceso ya no este activo.
+
+30. SAlga de la herramienta top presionando la tecla 'q'
+
+
+
+
+
+
+
 
 
