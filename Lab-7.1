@@ -70,11 +70,41 @@ Dese cuenta que al pasar a foreground el job 'rock' suspendido este reinicia tem
 [student@serverX -]$ Ctrl+C
 [student@serverx -]$ jobs
 
-12. En la ventana derecha termine el comando tail con Ctrl+C
+****** SEÑALES *******
 
-[student@serverx -]$ Ctrl+C
+12. Ejecutar 3 nuevos jobs en background similares a los anteriores que escriban la palabra 'game ', 'set ' y 'match ' 
+Confirmar que los 3 procesos esten en estado Running.
 
+[student@serverX -]$ (while true; do echo -n "game " >> ~/outfile; sleep 1; done) &
+[student@serverX -]$ (while true; do echo -n "set " >> ~/outfile; sleep 1; done) &
+[student@serverX -]$ (while true; do echo -n "match " >> ~/outfile; sleep 1; done) &
+[student@serverX -]$ jobs
 
+13. Suspenda el proceso 'game' utilizando SIGNALS. Luego verifique el estado de este proceso  
+Verifique tambien que en la ventana derecha este proceso ya no este activo.
+
+[student@serverx -]$ kill -SIGSTOP %number
+[student@serverx -]$ jobs
+
+14. Termine el proceso 'set'  utilizando SIGNALS. Luego verifique el estado de este proceso  
+Verifique tambien que en la ventana derecha este proceso ya no este activo.
+
+[student@serverx -]$ kill -SIGTERM %number
+[student@serverx -]$ jobs
+
+15. Reanude el proceso 'game' usando SIGNALS. Luego verifique el estado de este proceso  
+Verifique tambien que en la ventana derecha este proceso este activo.
+
+[student@serverX -]$ kill -SIGCONT %number
+[student@serverx -]$ jobs
+
+16. Termine los procesos restantes 'game', 'match' y tail utilizando solamente SIGNALS.
+
+[student@serverx -]$ kill -SIGTERM %number
+[student@serverX -]$ kill - SIGTERM %number
+[student@serverx -]$ jobs
+[student@serverx -]$ pkill - SIGTERM tail
+[student@serverx -]$
 
 
 
