@@ -20,7 +20,7 @@ Iniciar sesion con su usuario
 
 6. Confirme que el usurio juliet fue agregado al grupo usando el comando 'id'
 
-[root@serverx -]# id
+[root@serverx -]# id juliet
 uid=1001(juliet) gid=1001(juliet) groups=1001{juliet),30000(shakespeare)
 
 7. Añadir el usuario romeo al grupo shakespeare como Grupo Suplemntario
@@ -31,11 +31,11 @@ uid=1001(juliet) gid=1001(juliet) groups=1001{juliet),30000(shakespeare)
 
 [root@serverx -]# tail -5 /etc/group
 
-10. Cambiar el usuario principal del usuario reba por shakespeare
+10. Cambiar el grupo principal del usuario reba por shakespeare
 
 [root@serverx -]# usermod -g artistas reba
 
 11. Confirme que el usurio reba tiene ahora como grupo principal shakespeare
 
-[root@serverx -]# id
+[root@serverx -]# id reba
 uid=1003(reba) gid=30000(shakespeare) groups=1003(reba)
