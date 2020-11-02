@@ -106,3 +106,51 @@ HOSTNAME
 
 [Redeatelcap2@servidor -]$ exit
 
+***** PERSONALIZANDO EL SERVICIO SSHD *****
+
+16. Ingrese como usuario root a su propio servidor
+
+[Redeatelcap1@desktopX -]$ sudo su -
+[root@desktopX -]#
+
+17. Modifique el archivo del servicio ssh para que al iniciar sesion en su equipo apareza un mensaje advirtiendo sobre acceso restringido
+
+17a. Cree el archivo /etc/banner con el siguiente contenido.
+
+[root@desktopX -]# vi /etc/banner
+
+****************************************
+***       ACCESO RESTRINGIDO         ***
+***    Si no esta autorizado para    ***
+***      ingresar a este equipo      ***
+***   cierre sesion inmediatamente   ***
+****************************************
+
+17b. Configure el parametro Banner en la configuracion del servicio SSH. Reinicie el servicio para aplica los cambios.
+
+[root@desktopX -]# vi /etc/ssh/sshd_config
+
+Banner /etc/banner
+
+[root@desktopX -]# systemctl restart sshd
+
+18. Inicie sesion con el usuario Redeatelcap1 por ssh nuevamente y verifique que aparezca el mensaje de advertencia.
+
+login as: root
+Pre-authentication banner message from server:
+| ****************************************
+| ***       ACCESO RESTRINGIDO         ***
+| ***    Si no esta autorizado para    ***
+| ***      ingresar a este equipo      ***
+| ***   cierre sesion inmediatamente   ***
+| ****************************************
+End of banner message from server
+root@192.168.100.25's password:
+Activate the web console with: systemctl enable --now cockpit.socket
+
+This system is not registered to Red Hat Insights. See https://cloud.redhat.com/
+To register this system, run: insights-client --register
+
+Last login: Sun Nov  1 14:48:59 2020 from ::1
+[root@desktopX -]#
+
