@@ -50,15 +50,15 @@ Redeatelcap2@servidor 's password :
 
 9. Utilice el comando ssh para ejecutar el comando 'hostname' en el servidor remoto como Redeatelcap2
 
-Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 hostname
-Redeatelcap2@servidor 's password : password.123
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 hostname
+[Redeatelcap2@servidor 's password : password.123
 HOSTNAME
 
 **** Configuracion de SSH Key-Based Authentication
 
 10. Crear llaves publica y privada como usuario Redeatelcap1.
 
-Redeatelcap1@desktopX -]$ ssh-keygen
+[Redeatelcap1@desktopX -]$ ssh-keygen
 Generating public/private rsa key pair .
 Enter file in which to save the key (/home/Redeatelcap1/.ssh/id_rsa): Enter
 Created directory '/home/Redeatelcap1/.ssh' .
@@ -69,7 +69,7 @@ Your public key has been saved in /home/Redeatelcap1/.ssh/id_rsa.pub.
 
 11. Verifique que los archivos id_rsa e id_rsa.pub se hayan creado dentro del directorio .ssh en el directorio home del usuario
 
-Redeatelcap1@desktopX -]$ ls -l ~/.ssh/
+[Redeatelcap1@desktopX -]$ ls -l ~/.ssh/
 
 12. Envie la llave publica al usuario Redeatelcap2 en el servidor del instructor. La contraseña del usuario Redeatelcap2 es 'password.123'
 
@@ -88,11 +88,21 @@ Number of key(s) added : 1
 Now try logging into the machine, with : "ssh 'Redeatelcap2@servidor'"
 and check to make sure that only the key(s) you wanted were added .
 
-13. Ejecute el comando 'hostname' de manera remota en el servidor del instructor con el usuario Redeatelcap2 usando usted el usuario Redeatelcap1.
+13. Ejecute el comando 'hostname' de manera remota en el servidor del instructor con el usuario Redeatelcap2 usando usted el usuario Redeatelcap1. 
+No le solicitará contraseña
 
-Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 'hostname'
-Redeatelcap2@servidor 's password : password.123
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 'hostname'
+[Redeatelcap2@servidor 's password : password.123
 HOSTNAME
 
+14. Ahora inicie sesion en el servidor remoto. No le solicitará contraseña.
 
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63
+[Redeatelcap2@servidor 's password : password.123
+
+[Redeatelcap2@servidor -]$
+
+15. Cierre sesion en el servidor remoto.
+
+[Redeatelcap2@servidor -]$ exit
 
