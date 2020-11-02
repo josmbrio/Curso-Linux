@@ -1,0 +1,76 @@
+Iniciar sesion con su usuario
+
+1. Listar todos los units de servicio del sistema
+
+[student@serverx -]$ sudo systemctl list-units --type=service
+
+2. Listar todos los units de sockets del sistema, tanto activos como inactivos.
+
+[student@serverx -]$ sudo systemctl list-units --type=socket --all
+
+3. Explore el estado del servicio crond. Este servicio es utilizado para calendarizar tareas en el sistema.
+Muestre el estado del servicioe identifique el PID del proceso.
+
+[student@serverX -]$ sudo systemctl status crond
+
+4. Confirme que el demonio del proceso anterior esta en ejecuacion con el comando 'ps'.
+
+[student@serverx -]$ ps -p PID
+
+5. Explore el estado del servicio sshd. Este servicio es utilizado para la comunicacion segura entre sistemas remotos.
+Determine si este servicio esta habilitado para iniciarse al momento de booteo del sistema operativo.
+
+[student@serverx -]$ sudo systemctl is-enabled sshd
+
+6. Determine si el servicio sshd esta activo sin mostrar todo el detalle de informacion de estado.
+
+[student@serverx -]$ sudo systemctl is-active sshd
+
+7. Muestre el status detallado del servicio sshd.
+
+[student@serverx -]$ sudo systemctl status sshd
+
+8. Liste el status de enabled o disabled de todos los servicios del sistema 
+
+[student@serverx -]$ sudo systemctl list-unit-files --type=service
+
+9. Reiniciar el servicio de sshd. Fijese que el PID cambia. Consulte el status
+
+[student@serverx -]$ sudo systemctl restart sshd
+[student@serverx -]$ sudo systemctl status sshd
+
+10. Recargue (reload) el servicio sshd. Fíjese que el PID aquí no cambia.
+
+[student@serverx -]$ sudo systemctl reload sshd
+
+11. Verifique que el servicio chronyd este ejecutandose
+
+[student@serverx -]$ sudo systemctl status chronyd
+
+12. Detenga el servicio chronyd y consulte el status
+
+[student@serverX -]$ sudo systemctl stop chronyd
+[student@serverX -]$ sudo systemctl status chronyd
+
+13. Determine si el servicio chronyd esta habilitado al momento de booteo
+
+[student@serverx -]$ sudo systemctl is-enabled chronyd
+
+14. Reinicie el sistema y verifique el servicio chronyd se haya iniciado
+
+[student@serverX -]$ sudo reboot
+Espere un par de minutos y vuelva a iniciar sesion
+
+[student@serverX -]$ sudo systemcl status chronyd
+
+15. Deshabilite el servicio chronyd para que no inicie al momento de booteo del servidor
+
+[student@serverX -]$ sudo systemctl disable chronyd
+[student@serverx -]$ sudo systemctl status chronyd
+
+16. Reinicie el sistema y verifique el servicio chronyd no haya iniciado
+
+[student@serverX -]$ sudo reboot
+Espere un par de minutos y vuelva a iniciar sesion
+
+[student@serverX -]$ sudo systemcl status chronyd
