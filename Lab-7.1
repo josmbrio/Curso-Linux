@@ -139,7 +139,7 @@ done
 
 22. Determine cuantos CPU logicos tiene su servidor.
 
-[student@serverx -]$ cat /proc/cpuinfo | wc -l
+[student@serverx -]$ cat /proc/cpuinfo | grep "model name" | wc -l
 
 23. Ejecutar 1 instancia en background del ejecutable process101
 
