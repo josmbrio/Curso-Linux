@@ -1,0 +1,46 @@
+En este laboratorio vamos a reconfigurar el servicio rsyslog para que escriba mensajes especificos en un nuevo archivo de log.
+
+Iniciar sesion con su usuario
+
+1. Configure rsyslog de tal manera que los mensajes de severidad debug se almacenen en un nuevo archivo llamado /var/log/messages-debug
+Hagalo usando un nuevo archivo de configuracion llamado /etc/rsyslog.d/debug.conf
+
+[root@serverx -]# echo "*.debug /var/log/messages-debug" > /etc/rsyslog.d/debug.conf
+
+2. Aplique los cambios reiniciand el servicio de rsyslog
+
+[root@serverx -]# systemctl restart rsyslog
+
+4. Abra otro terminal y mantenga monitoreado en vivo el archivo /var/log/messages-debug con el comando tail
+
+[root@serverx -]# tail -f /var/log/messages-debug
+
+5. Genere un mensaje de log con severidad debug utilizando el comando logger.
+
+[root@serverx -]# logger -p user.debug "Debug message text"
+
+6. Verifique que el comando tail ejecutado anteriormente haya detectado el log generado.
+
+**** SYSTEMD JOURNAL ****
+
+7. Muestre los mensajes de journal que son originados por el proceso systemd. El proceso systemd siempre tiene PID 1
+
+[root@serverx -]# journalctl _PID=1
+
+8. Muestre los mensajes de journal que son originados por un servicio iniciado por el usuario con UID 81
+
+[root@serverx -]# journalctl _UID=81
+
+9. Muestre los mensajes de journal con prioridad (o severidad) warning en adelante
+
+[root@serverx -]# journalctl -p warning
+
+10. Consulte el journal del sistema mostrando solamente los logs generados en los ultimos 10 minutos. Su comando va a depender de la hora actual en la que este haciendo este laboratorio
+
+[root@serverx -]# journalctl --since 21:10:00 --until 21:20:00
+
+11. Muestre los eventos originados por el servicio SSHD desde las 9am del dia de hoy
+
+[root@serverx -]# journalctl _SYSTEMD_UNIT="sshd.service" --since 9:00:00
+
+
