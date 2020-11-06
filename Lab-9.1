@@ -4,7 +4,7 @@ Inicie sesion con su usuario Redeatelcap1
 El host key se almacenará en su cliente para identificar el servidor remoto. La conexion ssh resultara fallida si el host key del servidor remoto cambia por alguna razon.
 El host key almacenado en el client se guarda en el archivo known_hosts dentro de la carpeta .ssh del usuario que realiza la conexión.
 
-[Redeatelcap1@desktopX -]$ ssh 157.55.185.63
+[Redeatelcap1@desktopX -]$ ssh 52.247.117.132
 The authenticity of host 'serverX (172.25.X.11) ' can't be established .
 ECDSA key fingerprint is 47 :bf:82:cd:fa:68:06:ee:d8:83:03:1a:bb:29:14:a3.
 Are you sure you want to continue connecting (yes/no )? yes
@@ -20,7 +20,7 @@ Redeatelcap1@serverX 's password : password
 
 4. . Realice una conexión remota ssh hacia el server del instructor utilizando como usuario Redeatelcap2. La contraseña del usuario Redeatelcap2 es 'password.123'
 
-[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@52.247.117.132
 [Redeatelcap2@serverX 's password : password.123
 
 5. Ejecute el comando 'w'. Esta vez se mostrara la conexio activa con usuario Redeatelcap2 desde su cliente
@@ -38,7 +38,7 @@ Se recomienda eliminar el registro del host key del archivo known_hosts para que
 
 8. Inicie un shell remoto nuevamente con el usuario Redeatelcap2 y acepte el host key nuevamente. Luego salga de la sesion
 
-[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@52.247.117.132
 The authenticity of host 'serverX (172.25.X.11) ' can't be established .
 ECDSA key fingerprint is 47 :bf:82:cd:fa:68:06:ee:d8:83:03:1a:bb:29:14:a3.
 Are you sure you want to continue connecting (yes/no )? yes
@@ -50,7 +50,7 @@ Redeatelcap2@servidor 's password :
 
 9. Utilice el comando ssh para ejecutar el comando 'hostname' en el servidor remoto como Redeatelcap2
 
-[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 hostname
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@52.247.117.132 hostname
 [Redeatelcap2@servidor 's password : password.123
 HOSTNAME
 
@@ -73,8 +73,8 @@ Your public key has been saved in /home/Redeatelcap1/.ssh/id_rsa.pub.
 
 12. Envie la llave publica al usuario Redeatelcap2 en el servidor del instructor. La contraseña del usuario Redeatelcap2 es 'password.123'
 
-[Redeatelcap1@desktopX -]$ ssh-copy-id Redeatelcap2@157.55.185.63
-The authenticity of host 'servidor (157.55.185.63) ' can 't be established .
+[Redeatelcap1@desktopX -]$ ssh-copy-id Redeatelcap2@52.247.117.132
+The authenticity of host 'servidor (52.247.117.132) ' can 't be established .
 ECDSA key fingerprint is 33 :fa:a1:3c:98:30:ff :f6:d4:99:00:4e:7f:84:3e:c3.
 Are you sure you want to continue connecting (yes/no )? yes
 /usr/bin/ssh-copy-id : INFO : attempting to log in with the new key( s), to filter
@@ -91,13 +91,13 @@ and check to make sure that only the key(s) you wanted were added .
 13. Ejecute el comando 'hostname' de manera remota en el servidor del instructor con el usuario Redeatelcap2 usando usted el usuario Redeatelcap1. 
 No le solicitará contraseña
 
-[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63 'hostname'
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@52.247.117.132 'hostname'
 [Redeatelcap2@servidor 's password : password.123
 HOSTNAME
 
 14. Ahora inicie sesion en el servidor remoto. No le solicitará contraseña.
 
-[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@157.55.185.63
+[Redeatelcap1@desktopX -]$ ssh Redeatelcap2@52.247.117.132
 [Redeatelcap2@servidor 's password : password.123
 
 [Redeatelcap2@servidor -]$
