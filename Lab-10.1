@@ -1,6 +1,6 @@
 En este laboratorio vamos a reconfigurar el servicio rsyslog para que escriba mensajes especificos en un nuevo archivo de log.
 
-Iniciar sesion con su usuario
+Iniciar sesion con su usuario, y luego pasese a usuario root
 
 1. Configure rsyslog de tal manera que los mensajes de severidad debug se almacenen en un nuevo archivo llamado /var/log/messages-debug
 Hagalo usando un nuevo archivo de configuracion llamado /etc/rsyslog.d/debug.conf
@@ -42,5 +42,25 @@ Hagalo usando un nuevo archivo de configuracion llamado /etc/rsyslog.d/debug.con
 11. Muestre los eventos originados por el servicio SSHD desde las 9am del dia de hoy
 
 [root@serverx -]# journalctl _SYSTEMD_UNIT="sshd.service" --since 9:00:00
+
+***** PERSISTENCIA DEL JOURNAL *******
+
+Ahora vamos a configurar el journal para que los logs queden guardados y no empiecen desde cero en cada reinicio.
+
+12. Cree el direcotrio /var/log/journal. Para que funcione correctamente esta carpeta debe tener los permisos 2755, el propietario debe ser root y el grupo systemd-journal
+
+[root@serverx -]# mkdir /var/log/journal
+[root@serverx -]# chown root:systemd-journal /var/log/journal
+[root@serverx -]# chmod 2755 /var/log/journal
+
+13. Para que surta efecto, puede realizar 2 cosas: Reiniciar el servidor, o enviar la señal USR1 al servicio systemd-journal. Elija la que guste
+
+[root@serverx -]# killall -USR1 systemd-journald
+
+14. Para verificar que los logs ahora son persistentes, explore la carpeta /var/log/journal y asegurese que hay archivos con contenido de logs.
+
+
+
+
 
 
