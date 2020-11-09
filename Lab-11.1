@@ -1,1 +1,32 @@
-.
+Inicie sesion con su usarios y pasese a root
+
+1. Identifique la direccion IP y la MAC Address de la interfaz de red hacia donde usted se esta conectando
+
+[root@workstation ~]# ip addr
+
+IP: ___
+MAC: ___
+Nombre de interfaz: ____
+
+2. Visualize la estadisticas de la interfaz de red anterior
+
+[root@workstation ~]# ip -s link show enXXX
+
+3. Visualice la informacion de enrutamiento del sistema. Cual es el default gateway o puerta de enlace predeterminada?
+
+[root@workstation ~]# ip route
+
+4. Verifique que tenga conexión hacia el enrutador enviando solamente 5 paquetes con PING
+
+[root@workstation ~]# ping -c5 x.x.x.x
+
+5. Visualize todos los saltos entre su servidor y el host redhat.com 
+
+[root@workstation ~]# tracepath redhat.com
+
+6. Visualize los sockets en estado LISTEN o en escucha en su servidor, solo del protocolo TCP
+
+[root@workstation ~]# ss -lt
+
+
+
