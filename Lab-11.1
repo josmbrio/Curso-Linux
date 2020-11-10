@@ -29,4 +29,160 @@ Nombre de interfaz: ____
 [root@workstation ~]# ss -lt
 
 
+****** CONFIGURACION DE RED DESDE LA LINEA DE COMANDOS ********
+
+7. Visualice los parametros de configuracion de red con nmcli
+
+[root@workstation ~]# nmcli con show
+NAME UUID TYPE DEVICE
+Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
+
+8. Muestre solo las conexiones activas
+
+[root@workstation ~]# nmcli con show --active
+NAME UUID TYPE DEVICE
+Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
+
+9. Muestre todos los parametros de configuracion para la conexion activa. Presiona la letra 'q' cuando desea salir
+
+[root@workstation ~]# nmcli con show "Wired connection 1"
+connection.id: Wired connection 1
+connection.uuid: 03da038a-3257-4722-a478-53055cc90128
+connection.stable-id: --
+connection.type: 802-3-ethernet
+connection.interface-name: --
+connection.autoconnect: yes
+...output omitted...
+ipv4.method: manual
+ipv4.dns: 172.25.250.254
+ipv4.dns-search: lab.example.com,example.com
+... Output omitted ...
+... Output omitted ...
+
+10. Muestre el estado de todos los dispositivos
+
+[root@workstation ~]# nmcli dev status
+DEVICE TYPE STATE CONNECTION
+enX ethernet connected Wired connection 1
+lo loopback unmanaged --
+
+11. Muestre los parametros de configuracion para el dispositivo especifico
+
+[root@workstation ~]# nmcli dev show enX
+GENERAL.DEVICE: enX
+GENERAL.TYPE: ethernet
+GENERAL.HWADDR: 52:54:00:00:FA:0A
+GENERAL.MTU: 1500
+GENERAL.STATE: 100 (connected)
+GENERAL.CONNECTION: Wired connection 1
+GENERAL.CON-PATH: /org/freedesktop/NetworkManager/ActiveConnection/1
+WIRED-PROPERTIES.CARRIER: on
+
+12. Cree una conexión estática con la dirección 172.25.250.10, prefijo de red /24 y puerta de enlace predeterminada 172.25.250.254. Asigne el nombre static-addr a la conexión nueva
+
+[root@workstation ~]# nmcli con add con-name "static-addr" ifname enX type ethernet ipv4.method manual ipv4.address 172.25.250.10/24 ipv4.gateway 172.25.250.254
+Connection 'static-addr' (15aa3901-555d-40cb-94c6-cea6f9151634) successfully added.
+
+13. Modifique la conexión nueva para agregar el parámetro de configuración DNS.
+
+[root@workstation ~]# nmcli con mod "static-addr" ipv4.dns 172.25.250.254
+
+14. Visualize todas las conexiones. Debe aparecer la conexion nueva
+
+[root@workstation ~]# nmcli con show
+NAME UUID TYPE DEVICE
+Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
+static-addr 15aa3901-555d-40cb-94c6-cea6f9151634 ethernet --
+
+15. Visualice solo las conexiones activas. La nueva no la vera porque no esta activa en ninguna interfaz todavia.
+
+[root@workstation ~]# nmcli con show --active
+NAME UUID TYPE DEVICE
+Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
+
+16. Si se activa la conexión se perderia el acceso al servidor. NO LO HAGA! Solo tenga en consideracion que se lo realizaría con 'nmcli con up static-addr'
+
+***** MODIFICANDO LOS ARCHIVOS DE CONFIGURACION *****
+
+17. Tambien puede modificar una conexion editando directamente los archivos de configuracion. Modifique el archivo que corresponde a la conexion creada anteriormente static-addr y cambie el GATEWAY por 172.25.250.1
+
+[root@workstation ~]# cd /etc/sysconfig/network-scripts/ifcfg-static-addr
+[root@workstation ~]# ls -l ifcfg-*
+[root@workstation ~]# vi ifcfg-static-addr
+
+18. Cargue la nueva configuracion. Esto todavia no lo activará en la interfaz de red.
+
+[root@workstation ~]# nmcli con reload
+
+19. Visualice la configuracion modificada
+
+[root@workstation ~]# nmcli con show static-addr
+
+20. Ahora debemos activarla, pero si se activa la conexión se perderia el acceso al servidor. NO LO HAGA! Solo tenga en consideracion que hay que reiniciar la interfaz con 'nmcli con down enXX' y luego 'nmcli con up enXX'
+
+21. Elimine la conexion creada
+
+[root@workstation ~]# nmcli connection delete static-addr
+
+
+****** HOSTNAME Y RESOLUCION DE NOMBRES *****
+
+22. Muestre el nombre de host actual
+
+[root@workstation ~]# hostname
+
+23. Muestre el estado del nombre de host
+
+[root@workstation ~]# hostnamectl
+
+24. Cambie el hostname de manera permanente por su primer nombre y el numero que tiene asignado,con el siguiente formato: server-NOMBRE-#
+
+[root@workstation ~]# hostnamectl set-hostname server-NOMBRE-#
+
+25. Revise el archivo de hostname para comprobar que fue cambiado y que persistira en el booteo.
+
+[root@workstation ~]# cat /etc/hostname
+
+26. Muestre el estado del nombre de host
+
+[root@workstation ~]# hostnamectl
+
+27. Cambie de manera temporal el nombre del host por el formato server-#
+
+[root@workstation ~]# hostnamectl set-hostname server-#
+
+28. Consulte el nombre de host actual
+
+[root@workstation ~]# hostname
+
+29. Consulte el archivo de hostname
+
+[root@workstation ~]# cat /etc/hostname
+
+30. Agregue una nombre en el archivo hosts para que resuelva la IP 10.1.1.1
+
+[root@workstation ~]# vi /etc/hosts
+
+10.1.1.1   curso.server.com
+
+31. Ahora intente resolver el nombre curso.server.com
+
+[root@workstation ~]# getent hosts curso.server.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
