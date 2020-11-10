@@ -1,1 +1,88 @@
 Inicie sesion con su usuario y pasese a root
+
+1. Use el comando tar con las opciones -czf para crear una colección de archivos del directorio /etc mediante la compresión gzip. Guarde el archivo de la colección de archivos como /tmp/etc.tar.gz
+
+[root@servera ~]# tar -czf /tmp/etc.tar.gz /etc
+tar: Removing leading `/' from member names
+[root@servera ~]#
+
+2. Use el comando tar con las opciones -tzf para verificar que la colección de archivos etc.tar.gz contiene los archivos del directorio /etc.
+
+[root@servera ~]# tar -tzf /tmp/etc.tar.gz
+etc/
+etc/mtab
+etc/fstab
+etc/crypttab
+etc/resolv.conf
+...output omitted...
+
+3. Cree un directorio con el nombre /backuptest. Liste el contenido del archivo de copia de seguridad etc.tar.gz sea válido; Luego descomprima la colección de archivos en el directorio /backuptest.
+
+[root@servera ~]# mkdir /backuptest
+
+[root@servera ~]# cd /backuptest
+
+[root@servera backuptest]# tar -tzf /tmp/etc.tar.gz
+etc/
+etc/mtab
+etc/fstab
+etc/crypttab
+etc/resolv.conf
+...output omitted...
+
+[root@servera backuptest]# tar -xzf /tmp/etc.tar.gz
+
+4. Liste el contenido del directorio /backuptest. Verifique que el directorio contenga los archivos del directorio /etc.
+
+****** TRANSFERENCIA DE ARCHIVOS ENTRE SISTEMAS DE FORMA SEGURA ********
+
+5. Cree un directorio con el nombre /serverbackup y transfiera ahi el direcotrio /etc/ssh del servidor del instructor. La IP del instructor 40.84.229.197, la contraseña del usuario root es 'password'
+
+[root@servera -]# mkdir /serverbackup
+[root@servera -]# scp -r root@40.84.229.197:/etc/ssh /serverbackup
+
+6. Verifique que el directorio /etc/ssh del servidor del instructor se haya copiado en el directorio /serverbackup.
+
+[root@servera -]# ls -lR /serverbackup
+
+**** SINCRONIZACION DE ARCHIVOS CON RSYNC ******
+
+7. Cree un directorio con el nombre /serverlogs para almacenar los archivos de registro de la maquina del instructor
+
+[root@servera -]# mkdir /serverlogs
+
+8. Use el comando rsync para sincronizar el árbol de directorio /var/log del servidor del instructor en su propio servidor en la ruta /serverlogs. Tenga en cuenta que solo el usuario root puede leer todo el contenido del directorio /var/log. Todos los archivos se transfieren en la sincronización inicial.
+
+[root@servera -]# rsync -av root@40.84.229.197:/var/log /serverlogs
+root@serverb's password: password
+receiving incremental file list
+log/
+log/README
+log/boot.log
+...output omitted...
+log/tuned/tuned.log
+sent 992 bytes received 13,775,064 bytes 2,119,393.23 bytes/sec
+total size is 13,768,109 speedup is 1.00
+
+9. Ejecute de manera remota el comando logger para obtener una nueva entrada en el archivo de registro /var/log/messages del servidor del instructor para que refleje cuándo se realizó la última sincronización.
+
+[root@servera -]# ssh root@40.84.229.197 'logger "Log files synchronized"'
+Password: redhat
+[root@servera -]#
+
+10. Realice la sincronizacion nuevamente. Observe que ya no se copia todo, sino solamente los archivos que cambiaron su contenido.
+
+[student@servera ~]$ rsync -av root@40.84.229.197:/var/log /serverlogs
+root@serverb's password: password
+receiving incremental file list
+log/messages
+log/secure
+log/audit/audit.log
+sent 3,496 bytes received 27,243 bytes 8,782.57 bytes/sec
+total size is 11,502,695 speedup is 374.21
+
+
+
+
+
+
