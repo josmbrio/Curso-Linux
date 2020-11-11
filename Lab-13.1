@@ -1,0 +1,25 @@
+Ingrese con su usuario y cambiese a usuario root
+
+1. Descargue el paquete telnet en su directorio actual
+
+[root@workstation ~]# yumdownloader telnet
+[root@workstation ~]# ls -l
+
+2. Vea la informacion del paquete descargado
+
+[root@workstation ~]# rpm -qp -i telnet-0.17-73.el8_1.1.x86_64.rpm
+
+3. Liste los archivos que se encuentran dentro del paquete
+
+[root@workstation ~]# rpm -qp -l telnet-0.17-73.el8_1.1.x86_64.rpm
+
+4. Instale el paquete telnet en el sistema
+
+[root@workstation ~]# rpm -ivh telnet-0.17-73.el8_1.1.x86_64.rpm
+
+5. Use el comando rpm para verificar que el paquete esta instalado
+
+[root@workstation ~]# rpm -q telnet
+
+
+
