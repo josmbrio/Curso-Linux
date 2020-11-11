@@ -59,7 +59,43 @@ Ahora vamos a configurar el journal para que los logs queden guardados y no empi
 
 14. Para verificar que los logs ahora son persistentes, explore la carpeta /var/log/journal y asegurese que hay archivos con contenido de logs.
 
+******* CONFIGURANDO LA HORA *******
 
+15. Confirme que su timezone esta correcto
+
+[root@serverx -]# timedatectl
+
+16. Si esta incorrecto configure el adecuado
+
+[root@serverx -]# timedatectl set-timezone America/Guayaquil
+[root@serverx -]# timedatectl
+
+17. Intente ajustar la hora 5 minutos adelantado a su hora actual. No se lo permitira el sistema porque el servicio NTP esta activo.
+
+[root@serverx -]# timedatectl set-time 20:57:00
+Failed to set time: NTP unit is active
+
+18. Inactive el servicio NTP con cualquiera de los 2 comandos a continuacion
+
+[root@serverx -]# systemctl stop chronyd
+[root@serverx -]# timedatect set-ntp false
+
+17. Intente ajustar la hora 5 minutos adelantado a su hora actual.
+
+[root@serverx -]# timedatectl set-time 20:57:00
+
+18. Consulte la hora nuevamente 
+
+[root@serverx -]# timedatectl
+
+19. Active nuevamente el servicio NTP con cualquiera de los 2 comandos a continuacion
+
+[root@serverx -]# systemctl start chronyd
+[root@serverx -]# timedatect set-ntp true
+
+20. Espere 2 minutos y valide que la hora este sincronizada
+
+[root@serverx -]# timedatectl
 
 
 
