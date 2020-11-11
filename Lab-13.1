@@ -21,5 +21,98 @@ Ingrese con su usuario y cambiese a usuario root
 
 [root@workstation ~]# rpm -q telnet
 
+**** INSTALANDO SOFTWARE ******
+
+6. Intente ejecutar el comando guile. Obtendra un error
+
+[root@workstation ~]# guile
+-bash: guile: command not found
+
+7. Use el comando yum search para buscar paquetes que tienen guile como parte de su nombre o resumen.
+
+[root@workstation ~]# yum search guile
+
+8. Use el comando yum info para obtener mas informacion acerca del paquete guile
+
+[root@workstation ~]# yum info guile
+
+9. Use el comando yum install para instalar el paquete guile
+
+[root@workstation ~]# yum install guile
+
+10. Use el comando yum remove para eliminar el paquete guile, pero responda con NO cuando se le solicite. ¿Cuántos paquetes se quitarían?
+
+[root@workstation ~]# yum remove guile
+
+11. Use el comando yum remove para eliminar el paquete gc, pero responda con no
+cuando se le solicite. ¿Cuántos paquetes se quitarían?
+
+[root@workstation ~]# yum remove gc
+
+12. Use el comando yum group list para enumerar todos los grupos de componentes disponibles.
+
+[root@servera ~]# yum group list
+
+13. Use el comando yum group info para obtener más información acerca del grupo de componentes Herramientas de desarrollo RPM, incluida una lista de paquetes incluidos.
+
+[root@servera ~]# yum group info "RPM Development Tools"
+
+14. Use el comando yum group install para instalar el grupo de componentes Herramientas de desarrollo RPM.
+
+[root@servera ~]# yum group install "RPM Development Tools"
+
+15. Use el comando yum history para mostrar el historial de yum reciente.
+
+[root@servera ~]# yum history
+
+16. Use el comando yum history info para confirmar que la última transacción sea la instalación del grupo. Asegurese de usar el ID correcto
+
+[root@servera ~]# yum history info 6
+
+17. Use el comando yum history undo para eliminar el conjunto de paquetes que se instalaron cuando se instaló el paquete guile. Asegurese de usar el ID correcto
+
+[root@servera ~]# yum history undo 5
+
+18. Confirme que el paquete guile ya no esta instalado
+
+[root@servera ~]# rpm -q guile
+
+**** HABILITACION DE REPOSITORIOS YUM ****
+
+19. Configure un nuevo repositorio proporcionado por la URL https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+
+[root@servera ~]# yum-config-manager --add-repo="https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/"
+
+20. Examine el archivo de repositorio de software creado por el comando anterior en el directorio /etc/yum.repos.d. Use el comando vim para editar el archivo y agregue el parámetro gpgcheck=0 para deshabilitar la comprobación de clave GPG para el repositorio.
+
+[root@servera ~]# vi /etc/yum.repos.d/dl.fedoraproject.org_pub_epel_8_Everything_x86_64_.repo
+
+[dl.fedoraproject.org_pub_epel_8_Everything_x86_64_]
+name=created by dnf config-manager from https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+enabled=1
+gpgcheck=0
+
+21. Cree un nuevo repositorio utilizando un rpm proporcionado por el proveedor se software. El rpm esta publicado como http://repo.webtatic.com/yum/el7/webtatic-release.rpm
+
+[root@servera ~]# yum install --nogpgcheck http://repo.webtatic.com/yum/el7/webtatic-release.rpm
+
+22. Consulte todos los repositorios y confirme que esten los 2 que acabo de crear
+
+[root@servera ~]# yum repolist all
+
+23. Deshabilite el repositorio 'webtatic'
+
+[root@servera ~]# yum-config-manager --disable webtatic
+
+24. Salga del shell con exit
+
+
+
+
+
+
+
+
 
 
