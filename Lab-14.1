@@ -2,6 +2,8 @@ Inicie sesion con su usuario y pasese a root
 
 1. Prepare el laboratorio creando un archivo llamado script-lab.sh y copie el siguiente contenido:
 
+[root@servera ~]# vi script-lab.sh
+
 dd if=/dev/zero of=/dev/sdy bs=1M count=20
 mkfs.xfs /dev/sdy
 
