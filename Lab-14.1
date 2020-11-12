@@ -1,6 +1,87 @@
 Inicie sesion con su usuario y pasese a root
 
-1. Cree el directorio /mis-datos
+1. Prepare el laboratorio creando un archivo llamado script-lab.sh y copie el siguiente contenido:
+
+dd if=/dev/zero of=/dev/sdy bs=1M count=20
+mkfs.xfs /dev/sdy
+
+2. Otorgue permisos de ejecucion y ejecute el script.
+
+[root@servera ~]# chmod +x script-lab.sh
+[root@servera ~]# ./script-lab.sh
+
+3. Ahora tiene un dispositivo de almacenamiento en /dev/sdy ya formateado. Este dispositivo es simulado para esta practica. Cree una carpeta llamada /mis-datos
 
 [root@servera ~]# mkdir /mis-datos
+
+4. Monte el sistema de archivos del dispositivo /dev/sdy en la carpeta /mis-datos
+Para montar un archivo que no es un verdadero dispositivo de bloque es necesario incluir la opcion '-o loop' al comando mount para asociar dicho archivo al dispositivo de loopback del sistema.
+
+[root@servera ~]# mount -o loop /dev/sdy /mis-datos
+
+5. Ejecute el comando 'df -h' para ver el nuevo filesystem montado.
+
+[root@servera ~]# df -h
+
+6. Liste los dispositivos con 'lsblk -fp'. Verifique que el dispositivo loop0 esta montado sobre /mis-datos,
+
+[root@servera ~]# lsblk -fp
+
+7. Ingrese al directorio /mis-datos y cree un archivo llamado file.txt con el comando touch
+
+[root@servera ~]# cd /mis-datos
+[root@servera ~]# touch file.txt
+
+8. Intente desmontar el filesystem. No le permitira hacerlo porque usted esta usandolo ya que se encuentra ubicado dentro dle directorio.
+
+[root@servera ~]# umount /mis-datos
+umount: /mis-datos: target is busy
+
+9. Cambiese al direcotrio / e intentelo nuevamente.
+
+[root@servera ~]# cd /
+[root@servera ~]# umount /mis-datos
+
+10. Verifique que ya no este montado
+
+[root@servera ~]# df -h
+
+*** LOCALIZACION DE ARCHIVOS *****
+
+11. Asegurese que la base de datos de locate este actualizada. PAra esto ejecute el comando updatedb para ponerla al dia
+
+[root@servera ~]# updatedb
+
+12. Busque el archivo de configuración logrotate.conf
+
+[root@servera ~]# locate logrotate.conf
+/etc/logrotate.conf
+/usr/share/man/man5/logrotate.conf.5.gz
+
+13. Busque el archivo de configuración networkmanager.conf e ignore la distinción entre mayúsculas y minúsculas.
+
+[root@servera ~]# locate -i networkmanager.conf
+/etc/NetworkManager/NetworkManager.conf
+/etc/dbus-1/system.d/org.freedesktop.NetworkManager.conf
+/usr/share/man/man5/NetworkManager.conf.5.gz
+
+14. Use el comando find para buscar todos los archivos en el directorio /var/lib que son propiedad del usuario chrony.
+
+[root@servera ~]# find /var/lib -user chrony
+
+15. Enumere todos los archivos en el directorio /var que sean propiedad de root y que estén afiliados al grupo mail.
+
+[root@servera ~]# find /var -user root -group mail
+
+16. Enumere todos los archivos en el directorio /usr/bin que tengan un tamaño superior a 50 KB
+
+[root@servera ~]# find /usr/bin -size +50k
+
+17. Busque todos los archivos en el directorio /home/student que no se hayan modificado en los últimos 120 minutos
+
+[root@servera ~]# find /home/student -mmin +120
+
+18. Enumere todos los archivos del dispositivo de bloque en el directorio /dev.
+
+[root@servera ~]# find /dev -type b
 
