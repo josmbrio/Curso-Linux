@@ -106,7 +106,7 @@ Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
 
 17. Tambien puede modificar una conexion editando directamente los archivos de configuracion. Modifique el archivo que corresponde a la conexion creada anteriormente static-addr y cambie el GATEWAY por 172.25.250.1
 
-[root@workstation ~]# cd /etc/sysconfig/network-scripts/ifcfg-static-addr
+[root@workstation ~]# cd /etc/sysconfig/network-scripts/
 [root@workstation ~]# ls -l ifcfg-*
 [root@workstation ~]# vi ifcfg-static-addr
 
@@ -118,7 +118,7 @@ Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
 
 [root@workstation ~]# nmcli con show static-addr
 
-20. Ahora debemos activarla, pero si se activa la conexión se perderia el acceso al servidor. NO LO HAGA! Solo tenga en consideracion que hay que reiniciar la interfaz con 'nmcli con down enXX' y luego 'nmcli con up enXX'
+20. Ahora debemos activarla, pero si se activa la conexión se perderia el acceso al servidor. NO LO HAGA! Solo tenga en consideracion que hay que reiniciar la conexion con 'nmcli con down enXX' y luego 'nmcli con up enXX'
 
 21. Elimine la conexion creada
 
@@ -149,7 +149,7 @@ Wired connection 1 03da038a-3257-4722-a478-53055cc90128 ethernet enX
 
 27. Cambie de manera temporal el nombre del host por el formato server-#
 
-[root@workstation ~]# hostnamectl set-hostname server-#
+[root@workstation ~]# hostname server-#
 
 28. Consulte el nombre de host actual
 
